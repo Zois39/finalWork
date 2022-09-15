@@ -65,4 +65,3 @@ char separ = ',';
 Console.Write("Массив из строк не превышающих длину 3 символа:");
 Console.WriteLine();
 ShowArray(CreateArrayNoMore(StringToArray(inputString, separ), countChar));
-//ShowArray(StringToArray(inputString, separ));
