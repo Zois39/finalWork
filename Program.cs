@@ -19,10 +19,8 @@
     }
     string[] resultArray = new string[countString];
     if (countString > 0)
-    {
         for (int i = 0; i < countString; i++)
                 resultArray[i] = firstArray[apprIndex[i]];
-    }
     return resultArray;
 }
 
