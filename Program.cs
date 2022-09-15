@@ -1,24 +1,27 @@
-﻿string[] CreateArrayNoMoreThreeChar(string[] firstArray)
+﻿string[] CreateArrayNoMore(string[] firstArray, int leng)
 {
     int countString = 0;
     int[] apprIndex = new int[firstArray.Length];
     for (int i = 0, j = 0; i < firstArray.Length; i++)
-        if (firstArray[i].Length < 4)
+    {
+        if (String.IsNullOrEmpty(firstArray[i]) == true)
         {
             countString++;
             apprIndex[j] = i;
             j++;
         }
+        else if (firstArray[i].Length <= leng)
+        {
+            countString++;
+            apprIndex[j] = i;
+            j++;
+        }
+    }
     string[] resultArray = new string[countString];
     if (countString > 0)
     {
-        resultArray[0] = firstArray[apprIndex[0]];
-        for (int i = 1; i < firstArray.Length; i++)
-        {
-            if (apprIndex[i] > 0)
+        for (int i = 0; i < countString; i++)
                 resultArray[i] = firstArray[apprIndex[i]];
-            else break;
-        }
     }
     return resultArray;
 }
@@ -31,6 +34,7 @@ string[] StringToArray(string str, char separator)
             countString++;
     string[] result = new string[countString];
     for (int i = 0, j = 0; i < str.Length; i++)
+    {
         if (str[i] != separator)
             result[j] += str[i];
         else
@@ -38,12 +42,27 @@ string[] StringToArray(string str, char separator)
             i++;
             j++;
         }
+    }
     return result;
 }
 
-string[] str = StringToArray(Console.ReadLine(), Convert.ToChar(Console.ReadLine()));
-for (int i = 0; i < str.Length; i++)
-    Console.WriteLine(str[i] + " ");
-string[] aaa = CreateArrayNoMoreThreeChar(str);
-for (int i = 0; i < aaa.Length; i++)
-    Console.Write(aaa[i] + " ");
+string DeclareStringInput (string str)
+{
+    Console.Write(str);
+    return Console.ReadLine();
+}
+
+void ShowArray(string[] arr)
+{
+    for (int i = 0; i < arr.Length; i++)
+        Console.WriteLine(arr[i] + " ");
+}
+
+string inputString = DeclareStringInput("Введите массив в формате: a, bc, def, ...: ");
+int countChar = 3;
+char separ = ',';
+
+Console.Write("Массив из строк не превышающих длину 3 символа:");
+Console.WriteLine();
+ShowArray(CreateArrayNoMore(StringToArray(inputString, separ), countChar));
+//ShowArray(StringToArray(inputString, separ));
